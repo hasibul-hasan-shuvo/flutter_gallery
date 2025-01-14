@@ -71,7 +71,6 @@ import Photos
             var albums: [[String: Any]] = []
             let dispatchGroup = DispatchGroup()
 
-            // Fetch Smart Albums (like Camera Roll)
             let smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
             smartAlbums.enumerateObjects { collection, _, _ in
                 dispatchGroup.enter()
@@ -83,7 +82,6 @@ import Photos
                 }
             }
 
-            // Fetch User Created Albums
             let userAlbums = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
             userAlbums.enumerateObjects { collection, _, _ in
                 dispatchGroup.enter()
@@ -108,25 +106,19 @@ import Photos
 
         let assets = PHAsset.fetchAssets(in: collection, options: fetchOptions)
         guard let firstAsset = assets.firstObject else {
-            completion(nil) // No images in the album
+            completion(nil)
             return
         }
 
-        let imageManager = PHImageManager.default()
-        let options = PHImageRequestOptions()
-        options.isNetworkAccessAllowed = true
-        options.isSynchronous = false
-
-        // Request the file URL for the image
         firstAsset.requestContentEditingInput(with: nil) { contentEditingInput, _ in
             if let fileURL = contentEditingInput?.fullSizeImageURL {
                 let albumInfo: [String: Any] = [
                     "albumName": collection.localizedTitle ?? "Unknown Album",
-                    "lastImagePath": fileURL.path // Pass the file path to Flutter
+                    "lastImagePath": fileURL.path
                 ]
                 completion(albumInfo)
             } else {
-                completion(nil) // Could not fetch file URL
+                completion(nil)
             }
         }
     }
@@ -137,39 +129,41 @@ import Photos
             fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
             fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
 
-            let collections = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
-            collections.enumerateObjects { collection, _, stop in
+            let userAlbums = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
+            let smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
+
+            var collections: [PHAssetCollection] = []
+
+            userAlbums.enumerateObjects { collection, _, _ in
+                collections.append(collection)
+            }
+
+            smartAlbums.enumerateObjects { collection, _, _ in
+                collections.append(collection)
+            }
+
+            for collection in collections {
                 if collection.localizedTitle == albumName {
                     let assets = PHAsset.fetchAssets(in: collection, options: fetchOptions)
-                    let imageManager = PHImageManager.default()
-                    var photoAssets: [[String: Any]] = []
+                    var photoPaths: [String] = []
 
                     let dispatchGroup = DispatchGroup()
+
                     assets.enumerateObjects { asset, _, _ in
                         dispatchGroup.enter()
-                        let options = PHImageRequestOptions()
-                        options.isNetworkAccessAllowed = true
-                        options.deliveryMode = .highQualityFormat
 
-                        imageManager.requestImageData(for: asset, options: options) { data, _, _, info in
-                            if let data = data {
-                                let photoInfo: [String: Any] = [
-                                    "identifier": asset.localIdentifier,
-                                    "data": FlutterStandardTypedData(bytes: data),
-                                    "creationDate": asset.creationDate?.timeIntervalSince1970 ?? 0,
-                                    "width": asset.pixelWidth,
-                                    "height": asset.pixelHeight
-                                ]
-                                photoAssets.append(photoInfo)
+                        asset.requestContentEditingInput(with: nil) { contentEditingInput, _ in
+                            if let fileURL = contentEditingInput?.fullSizeImageURL {
+                                photoPaths.append(fileURL.path)
                             }
                             dispatchGroup.leave()
                         }
                     }
 
                     dispatchGroup.notify(queue: .main) {
-                        result(photoAssets)
+                        result(photoPaths)
                     }
-                    stop.pointee = true
+                    break
                 }
             }
         }
