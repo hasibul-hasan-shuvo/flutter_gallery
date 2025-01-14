@@ -115,7 +115,7 @@ import Photos
                 let albumInfo: [String: Any] = [
                     "albumName": collection.localizedTitle ?? "Unknown Album",
                     "thumbnailPath": fileURL.path,
-                    "imageCount": assets.count
+                    "totalImageCount": assets.count
                 ]
                 completion(albumInfo)
             } else {

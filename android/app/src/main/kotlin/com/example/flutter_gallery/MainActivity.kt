@@ -85,8 +85,8 @@ class MainActivity : FlutterActivity() {
         }
     }
 
-    private fun fetchAlbums(): List<Map<String, String>> {
-        val albums = mutableMapOf<String, String>()
+    private fun fetchAlbums(): List<Map<String, Any>> {
+        val albums = mutableMapOf<String, Pair<String, Int>>() // Map to store album name, thumbnail path, and count
         val projection = arrayOf(
             MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
             MediaStore.Images.Media.DATA,
@@ -110,7 +110,10 @@ class MainActivity : FlutterActivity() {
                 val imagePath = it.getString(it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA))
 
                 if (!albums.containsKey(albumName)) {
-                    albums[albumName] = imagePath
+                    albums[albumName] = Pair(imagePath, 1) // Add new album with initial count as 1
+                } else {
+                    val (thumbnail, count) = albums[albumName]!!
+                    albums[albumName] = Pair(thumbnail, count + 1) // Increment count for existing album
                 }
             }
         }
@@ -118,7 +121,8 @@ class MainActivity : FlutterActivity() {
         return albums.map {
             mapOf(
                 "albumName" to it.key,
-                "thumbnailPath" to it.value,
+                "thumbnailPath" to it.value.first,
+                "totalImageCount" to it.value.second
             )
         }
     }

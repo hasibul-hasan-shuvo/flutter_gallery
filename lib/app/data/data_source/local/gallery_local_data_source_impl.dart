@@ -46,6 +46,7 @@ class GalleryLocalDataSourceImpl implements GalleryLocalDataSource {
                 Album(
                   albumName: album['albumName'],
                   thumbnailPath: album['thumbnailPath'],
+                  totalImageCount: album['totalImageCount'] ?? 0,
                 ),
               );
             }
