@@ -35,14 +35,21 @@ class GalleryLocalDataSourceImpl implements GalleryLocalDataSource {
     try {
       return platform.invokeMethod('fetchAlbums').then((albums) {
         if (albums != null && albums is List) {
-          return albums
-              .map(
-                (album) => Album(
-                  albumName: album['albumName'],
-                  lastImagePath: album['lastImagePath'],
-                ),
-              )
-              .toList();
+          List<Album> finalAlbums = [];
+
+          for (var album in albums) {
+            if (album['albumName'] != null &&
+                album['albumName'] != '' &&
+                album['lastImagePath'] != null &&
+                album['lastImagePath'] != '') {
+              finalAlbums.add(Album(
+                albumName: album['albumName'],
+                lastImagePath: album['lastImagePath'],
+              ));
+            }
+          }
+
+          return finalAlbums;
         }
 
         return [];
@@ -60,13 +67,15 @@ class GalleryLocalDataSourceImpl implements GalleryLocalDataSource {
         {'albumName': albumName},
       ).then((images) {
         if (images != null && images is List) {
-          return images
-              .map(
-                (image) => Image(
-                  path: image,
-                ),
-              )
-              .toList();
+          List<Image> finalImages = [];
+
+          for (var image in images) {
+            if (image != null && image != '') {
+              finalImages.add(Image(path: image));
+            }
+          }
+
+          return finalImages;
         }
 
         return [];
