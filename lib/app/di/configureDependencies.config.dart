@@ -28,9 +28,9 @@ _i174.GetIt $initGetIt(
     environment,
     environmentFilter,
   );
-  gh.factory<_i191.GalleryRepository>(() => _i867.GalleryRepositoryImpl(
-      gh<_i1068.GalleryLocalDataSource>(instanceName: 'localDataSource')));
-  gh.factory<_i1068.GalleryLocalDataSource>(
+  gh.lazySingleton<_i1068.GalleryLocalDataSource>(
       () => _i1071.GalleryLocalDataSourceImpl());
+  gh.lazySingleton<_i191.GalleryRepository>(
+      () => _i867.GalleryRepositoryImpl(gh<_i1068.GalleryLocalDataSource>()));
   return getIt;
 }
