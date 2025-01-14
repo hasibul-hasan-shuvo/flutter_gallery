@@ -40,12 +40,14 @@ class GalleryLocalDataSourceImpl implements GalleryLocalDataSource {
           for (var album in albums) {
             if (album['albumName'] != null &&
                 album['albumName'] != '' &&
-                album['lastImagePath'] != null &&
-                album['lastImagePath'] != '') {
-              finalAlbums.add(Album(
-                albumName: album['albumName'],
-                lastImagePath: album['lastImagePath'],
-              ));
+                album['thumbnailPath'] != null &&
+                album['thumbnailPath'] != '') {
+              finalAlbums.add(
+                Album(
+                  albumName: album['albumName'],
+                  thumbnailPath: album['thumbnailPath'],
+                ),
+              );
             }
           }
 

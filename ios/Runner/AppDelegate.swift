@@ -114,7 +114,8 @@ import Photos
             if let fileURL = contentEditingInput?.fullSizeImageURL {
                 let albumInfo: [String: Any] = [
                     "albumName": collection.localizedTitle ?? "Unknown Album",
-                    "lastImagePath": fileURL.path
+                    "thumbnailPath": fileURL.path,
+                    "imageCount": assets.count
                 ]
                 completion(albumInfo)
             } else {

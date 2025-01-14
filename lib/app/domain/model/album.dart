@@ -2,11 +2,11 @@ import 'dart:io';
 
 class Album {
   final String albumName;
-  final String lastImagePath;
-  final File lastImage;
+  final String thumbnailPath;
+  final File thumbnail;
 
   Album({
     required this.albumName,
-    required this.lastImagePath,
-  }) : lastImage = File(lastImagePath);
+    required this.thumbnailPath,
+  }) : thumbnail = File(thumbnailPath);
 }

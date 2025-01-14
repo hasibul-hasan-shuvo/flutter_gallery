@@ -118,7 +118,7 @@ class MainActivity : FlutterActivity() {
         return albums.map {
             mapOf(
                 "albumName" to it.key,
-                "lastImagePath" to it.value,
+                "thumbnailPath" to it.value,
             )
         }
     }
