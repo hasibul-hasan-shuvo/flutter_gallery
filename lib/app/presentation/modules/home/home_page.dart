@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gallery/app/presentation/core/extensions/context_extensions.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -22,8 +23,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Home page"),
+        backgroundColor: context.colors.inversePrimary,
+        title: Text(
+          context.localizations.titleHome,
+        ),
       ),
       body: Center(
         child: Column(
@@ -34,7 +37,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              style: context.textTheme.headlineMedium,
             ),
           ],
         ),
