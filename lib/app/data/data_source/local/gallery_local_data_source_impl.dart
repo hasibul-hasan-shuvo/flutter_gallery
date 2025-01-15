@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_gallery/app/data/data_source/local/gallery_local_data_source.dart';
 import 'package:flutter_gallery/app/domain/model/album.dart';
-import 'package:flutter_gallery/app/domain/model/image.dart';
+import 'package:flutter_gallery/app/domain/model/photo.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: GalleryLocalDataSource)
@@ -63,18 +63,18 @@ class GalleryLocalDataSourceImpl implements GalleryLocalDataSource {
   }
 
   @override
-  Future<List<Image>> getImagesByAlbumName(String albumName) {
+  Future<List<Photo>> getImagesByAlbumName(String albumName) {
     try {
       return platform.invokeMethod(
         'fetchPhotos',
         {'albumName': albumName},
       ).then((images) {
         if (images != null && images is List) {
-          List<Image> finalImages = [];
+          List<Photo> finalImages = [];
 
           for (var image in images) {
             if (image != null && image != '') {
-              finalImages.add(Image(path: image));
+              finalImages.add(Photo(path: image));
             }
           }
 

@@ -6,7 +6,7 @@ import 'package:flutter_gallery/app/presentation/core/utils/app_values.dart';
 import 'package:flutter_gallery/app/presentation/modules/albums/view_model/albums_event.dart';
 import 'package:flutter_gallery/app/presentation/modules/albums/view_model/albums_state.dart';
 import 'package:flutter_gallery/app/presentation/modules/albums/view_model/albums_view_model.dart';
-import 'package:flutter_gallery/app/presentation/modules/albums/widget/album_card_view.dart';
+import 'package:flutter_gallery/app/presentation/modules/albums/widget/item_album_grid_view.dart';
 
 class AlbumsPage extends StatelessWidget {
   const AlbumsPage({super.key});
@@ -37,7 +37,7 @@ class AlbumsPage extends StatelessWidget {
                   itemCount: state.albums.length,
                   itemBuilder: (context, index) {
                     final album = state.albums[index];
-                    return AlbumCardView(album: album);
+                    return ItemAlbumGridView(album: album);
                   },
                 ),
               );

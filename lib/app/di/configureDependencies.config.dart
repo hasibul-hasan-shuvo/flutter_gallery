@@ -20,6 +20,8 @@ import '../presentation/modules/albums/view_model/albums_view_model.dart'
     as _i491;
 import '../presentation/modules/permission/view_model/permission_view_model.dart'
     as _i492;
+import '../presentation/modules/photos/view_model/photos_view_model.dart'
+    as _i35;
 import '../presentation/modules/splash/view_model/splash_view_model.dart'
     as _i615;
 
@@ -44,5 +46,7 @@ _i174.GetIt $initGetIt(
       galleryRepository: gh<_i191.GalleryRepository>()));
   gh.factory<_i491.AlbumsViewModel>(
       () => _i491.AlbumsViewModel(gh<_i191.GalleryRepository>()));
+  gh.factory<_i35.PhotosViewModel>(
+      () => _i35.PhotosViewModel(gh<_i191.GalleryRepository>()));
   return getIt;
 }
