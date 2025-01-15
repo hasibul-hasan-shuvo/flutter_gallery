@@ -4,8 +4,6 @@ abstract class SplashState {}
 
 class SplashInitial extends SplashState {}
 
-class SplashLoading extends SplashState {}
-
 class SplashPermissionGranted extends SplashState {}
 
 class SplashPermissionDenied extends SplashState {}

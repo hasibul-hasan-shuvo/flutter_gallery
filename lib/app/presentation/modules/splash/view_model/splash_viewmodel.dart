@@ -13,5 +13,20 @@ class SplashViewModel extends Bloc<SplashEvent, SplashState> {
     required GalleryRepository galleryRepository,
   }) : super(SplashInitial()) {
     _galleryRepository = galleryRepository;
+    on<CheckPermissionEvent>(_onCheckPermission);
+  }
+
+  Future<void> _onCheckPermission(
+      CheckPermissionEvent event, Emitter<SplashState> emit) async {
+    try {
+      final isGranted = await _galleryRepository.checkGalleryPermission();
+      if (isGranted) {
+        emit(SplashPermissionGranted());
+      } else {
+        emit(SplashPermissionDenied());
+      }
+    } catch (e) {
+      emit(SplashError(e.toString()));
+    }
   }
 }
