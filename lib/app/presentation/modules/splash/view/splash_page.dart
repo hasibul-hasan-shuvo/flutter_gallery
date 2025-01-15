@@ -21,7 +21,10 @@ class SplashPage extends StatelessWidget {
         body: BlocListener<SplashViewModel, SplashState>(
           listener: (context, state) {
             if (state is SplashPermissionGranted) {
-              print("Permission granted");
+              _navigateToNextPage(
+                context,
+                AppRoutes.albums,
+              );
             } else if (state is SplashPermissionDenied) {
               _navigateToNextPage(
                 context,

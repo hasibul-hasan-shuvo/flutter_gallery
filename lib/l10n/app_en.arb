@@ -1,7 +1,9 @@
 {
   "buttonTextPermissionAccess": "Grant Access",
-  "titleHome": "Home",
+  "titleAlbums": "Albums",
   "titlePermissionPage": "Require Permission",
+  "messageNoAlbumsFound": "No Albums Found",
   "messagePermissionPage": "To show your black and white photos, we just need your folder permission.\nWe promise, we don’t take your photos.",
-  "messagePermissionDenied": "Permission denied"
+  "messagePermissionDenied": "Permission denied",
+  "photos": "Photos"
 }

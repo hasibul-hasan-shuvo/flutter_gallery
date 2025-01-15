@@ -1,3 +1,4 @@
+import 'package:flutter_gallery/app/presentation/modules/albums/view/albums_page.dart';
 import 'package:flutter_gallery/app/presentation/modules/permission/view/permission_page.dart';
 import 'package:flutter_gallery/app/presentation/modules/splash/view/splash_page.dart';
 import 'package:go_router/go_router.dart';
@@ -16,6 +17,11 @@ final GoRouter appRouter = GoRouter(
       path: _Paths.permission,
       name: AppRoutes.permission,
       builder: (context, state) => const PermissionPage(),
+    ),
+    GoRoute(
+      path: _Paths.albums,
+      name: AppRoutes.albums,
+      builder: (context, state) => const AlbumsPage(),
     ),
   ],
 );

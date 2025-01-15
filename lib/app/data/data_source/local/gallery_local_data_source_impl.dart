@@ -44,7 +44,7 @@ class GalleryLocalDataSourceImpl implements GalleryLocalDataSource {
                 album['thumbnailPath'] != '') {
               finalAlbums.add(
                 Album(
-                  albumName: album['albumName'],
+                  name: album['albumName'],
                   thumbnailPath: album['thumbnailPath'],
                   totalImageCount: album['totalImageCount'] ?? 0,
                 ),

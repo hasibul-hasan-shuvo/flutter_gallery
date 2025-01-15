@@ -16,6 +16,8 @@ import '../data/data_source/local/gallery_local_data_source_impl.dart'
     as _i1071;
 import '../data/repository/gallery_repository_impl.dart' as _i867;
 import '../domain/repository/gallery_repository.dart' as _i191;
+import '../presentation/modules/albums/view_model/albums_view_model.dart'
+    as _i491;
 import '../presentation/modules/permission/view_model/permission_view_model.dart'
     as _i492;
 import '../presentation/modules/splash/view_model/splash_view_model.dart'
@@ -40,5 +42,7 @@ _i174.GetIt $initGetIt(
       _i615.SplashViewModel(galleryRepository: gh<_i191.GalleryRepository>()));
   gh.factory<_i492.PermissionViewModel>(() => _i492.PermissionViewModel(
       galleryRepository: gh<_i191.GalleryRepository>()));
+  gh.factory<_i491.AlbumsViewModel>(
+      () => _i491.AlbumsViewModel(gh<_i191.GalleryRepository>()));
   return getIt;
 }

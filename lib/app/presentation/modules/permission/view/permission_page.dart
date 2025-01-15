@@ -6,6 +6,8 @@ import 'package:flutter_gallery/app/presentation/core/utils/app_images.dart';
 import 'package:flutter_gallery/app/presentation/core/utils/app_values.dart';
 import 'package:flutter_gallery/app/presentation/core/widgets/asset_image_view.dart';
 import 'package:flutter_gallery/app/presentation/modules/permission/view_model/permission_view_model.dart';
+import 'package:flutter_gallery/app/presentation/routes/router.dart';
+import 'package:go_router/go_router.dart';
 
 class PermissionPage extends StatelessWidget {
   const PermissionPage({super.key});
@@ -18,7 +20,7 @@ class PermissionPage extends StatelessWidget {
         body: BlocListener<PermissionViewModel, PermissionState>(
           listener: (context, state) {
             if (state is PermissionGranted) {
-              // Navigate to albums
+              context.goNamed(AppRoutes.albums);
             } else if (state is PermissionDenied) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
