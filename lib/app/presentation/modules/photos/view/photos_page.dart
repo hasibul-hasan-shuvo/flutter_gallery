@@ -23,7 +23,7 @@ class PhotosPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(albumName),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
+            icon: const Icon(Icons.chevron_left),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ),

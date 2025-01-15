@@ -20,6 +20,8 @@ import '../presentation/modules/albums/view_model/albums_view_model.dart'
     as _i491;
 import '../presentation/modules/permission/view_model/permission_view_model.dart'
     as _i492;
+import '../presentation/modules/photo/view_model/photo_view_model.dart'
+    as _i360;
 import '../presentation/modules/photos/view_model/photos_view_model.dart'
     as _i35;
 import '../presentation/modules/splash/view_model/splash_view_model.dart'
@@ -36,6 +38,7 @@ _i174.GetIt $initGetIt(
     environment,
     environmentFilter,
   );
+  gh.factory<_i360.PhotoViewModel>(() => _i360.PhotoViewModel());
   gh.lazySingleton<_i1068.GalleryLocalDataSource>(
       () => _i1071.GalleryLocalDataSourceImpl());
   gh.lazySingleton<_i191.GalleryRepository>(
