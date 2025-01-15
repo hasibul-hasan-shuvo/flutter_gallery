@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gallery/app/di/configureDependencies.dart';
 import 'package:flutter_gallery/app/presentation/core/utils/app_images.dart';
 import 'package:flutter_gallery/app/presentation/core/utils/app_values.dart';
 import 'package:flutter_gallery/app/presentation/core/widgets/asset_image_view.dart';
-import 'package:flutter_gallery/app/presentation/modules/splash/view_model/splash_viewmodel.dart';
+import 'package:flutter_gallery/app/presentation/modules/splash/view_model/splash_view_model.dart';
+import 'package:flutter_gallery/app/presentation/routes/router.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -19,18 +23,27 @@ class SplashPage extends StatelessWidget {
             if (state is SplashPermissionGranted) {
               print("Permission granted");
             } else if (state is SplashPermissionDenied) {
-              print("Permission denied");
+              _navigateToNextPage(
+                context,
+                AppRoutes.permission,
+              );
             }
           },
           child: Center(
             child: AssetImageView(
               fileName: AppImages.logo,
-              height: AppValues.splashLogoHeight,
+              height: AppValues.logoHeight,
               fit: BoxFit.fitHeight,
             ),
           ),
         ),
       ),
     );
+  }
+
+  void _navigateToNextPage(BuildContext context, String route) {
+    Timer(Duration(milliseconds: 500), () {
+      context.goNamed(route);
+    });
   }
 }

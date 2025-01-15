@@ -1,4 +1,4 @@
-import 'package:flutter_gallery/app/presentation/modules/home/home_page.dart';
+import 'package:flutter_gallery/app/presentation/modules/permission/view/permission_page.dart';
 import 'package:flutter_gallery/app/presentation/modules/splash/view/splash_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -13,9 +13,9 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) => const SplashPage(),
     ),
     GoRoute(
-      path: _Paths.home,
-      name: AppRoutes.home,
-      builder: (context, state) => HomePage(),
+      path: _Paths.permission,
+      name: AppRoutes.permission,
+      builder: (context, state) => const PermissionPage(),
     ),
   ],
 );

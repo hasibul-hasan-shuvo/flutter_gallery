@@ -1,4 +1,4 @@
-part of 'splash_viewmodel.dart';
+part of 'splash_view_model.dart';
 
 abstract class SplashState {}
 

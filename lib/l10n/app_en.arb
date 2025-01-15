@@ -1,3 +1,7 @@
 {
-  "titleHome": "Home"
+  "buttonTextPermissionAccess": "Grant Access",
+  "titleHome": "Home",
+  "titlePermissionPage": "Require Permission",
+  "messagePermissionPage": "To show your black and white photos, we just need your folder permission.\nWe promise, we don’t take your photos.",
+  "messagePermissionDenied": "Permission denied"
 }
