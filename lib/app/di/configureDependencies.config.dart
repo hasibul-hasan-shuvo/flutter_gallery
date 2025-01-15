@@ -47,9 +47,9 @@ _i174.GetIt $initGetIt(
       _i615.SplashViewModel(galleryRepository: gh<_i191.GalleryRepository>()));
   gh.factory<_i492.PermissionViewModel>(() => _i492.PermissionViewModel(
       galleryRepository: gh<_i191.GalleryRepository>()));
-  gh.factory<_i491.AlbumsViewModel>(
-      () => _i491.AlbumsViewModel(gh<_i191.GalleryRepository>()));
   gh.factory<_i35.PhotosViewModel>(
       () => _i35.PhotosViewModel(gh<_i191.GalleryRepository>()));
+  gh.factory<_i491.AlbumsViewModel>(
+      () => _i491.AlbumsViewModel(gh<_i191.GalleryRepository>()));
   return getIt;
 }

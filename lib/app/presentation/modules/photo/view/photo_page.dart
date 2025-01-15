@@ -17,6 +17,7 @@ class PhotoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(photoPath);
     return BlocProvider(
       create: (_) => getIt<PhotoViewModel>(),
       child: Scaffold(
